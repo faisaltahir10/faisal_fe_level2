@@ -19,8 +19,8 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="bg-[#0b1222] text-white w-56 h-screen p-4 flex flex-col">
-      <h1 className="text-xl font-bold mb-6">F-Dashboard</h1>
+    <aside className="bg-slate-800 text-white w-56 h-screen p-4 flex flex-col">
+      <h1 className="text-xl font-bold mb-6">📊 F-Dashboard</h1>
 
       <nav className="flex-1 space-y-2">
         {menuItems.map((item) => {
@@ -63,12 +63,6 @@ export default function Sidebar() {
               <FaSignOutAlt />
               Logout
             </button>
-
-          {/* User email */}
-          {/* <div className="text-center text-sm text-gray-400">
-            <div className="text-xs">Logged in as:</div>
-            <div className="font-medium text-white">{session.email}</div>
-          </div> */}
         </div>
     </aside>
   );

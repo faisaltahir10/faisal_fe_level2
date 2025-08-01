@@ -1,7 +1,9 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import Header from '@/components/dashboard/Header';
 import Sidebar from '@/components/dashboard/Sidebar';
+import Footer from '@/components/dashboard/Footer';
 
 export default async function HomePage() {
   const token = cookies().get('access_token')?.value;
@@ -18,15 +20,40 @@ export default async function HomePage() {
   const profile = await res.json();
 
   return (
-    <div className="flex min-h-screen">
-       <Sidebar />
-       {/* Main content */}
-       <main className="flex-1 p-6 bg-gray-100">
-         <h1 className="text-3xl font-bold mb-4">F - Dashboard</h1>
-          <div className="text-black">
-           <h1>Welcome, {profile.email}</h1>
-         </div>
-       </main>
-     </div>
+    <div className="flex min-h-screen bg-gray-100">
+      <Sidebar />
+
+      <div className="flex flex-col flex-1">
+        <Header />
+        <main className="flex-1 p-6">
+          <div className="p-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+            Welcome to F-Dashboard
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Glad to have you back, <span className="font-medium text-gray-800">john@mail.com</span>
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-white shadow rounded-xl p-5 border border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">📊 Overview</h3>
+              <p className="text-sm text-gray-500">General status and insights.</p>
+            </div>
+
+            <div className="bg-white shadow rounded-xl p-5 border border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">👤 Profile</h3>
+              <p className="text-sm text-gray-500">Update your user information.</p>
+            </div>
+
+            <div className="bg-white shadow rounded-xl p-5 border border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">📅 Activity</h3>
+              <p className="text-sm text-gray-500">Check your recent activity log.</p>
+            </div>
+          </div>
+        </div>
+        </main>
+        <Footer />
+      </div>
+    </div>
   );
 }

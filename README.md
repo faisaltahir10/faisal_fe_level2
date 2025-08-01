@@ -1,1 +1,1 @@
-Saya memakai template buatan sendiri
+Izin memakai template sendiri, menggunakan Tailwind

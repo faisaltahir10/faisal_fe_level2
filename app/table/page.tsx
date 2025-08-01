@@ -1,7 +1,9 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import Header from '@/components/dashboard/Header';
 import Sidebar from '@/components/dashboard/Sidebar';
+import Footer from '@/components/dashboard/Footer';
 
 export default async function TablePage() {
   const token = cookies().get('access_token')?.value;
@@ -33,39 +35,42 @@ export default async function TablePage() {
   const datax = await res2.json();
   
   return (
-    <div className="min-h-screen flex">
+    <div className="flex min-h-screen bg-gray-100">
       <Sidebar />
-
-      {/* Main content */}
-      <main className="flex-1 p-6 bg-gray-100">
-        <h1 className="text-3xl font-bold mb-6">Data Tables</h1>
-
-        <div className="bg-white p-6 rounded shadow overflow-x-auto">
-          <table className="min-w-full text-sm text-left border border-gray-200">
-            <thead className="bg-gray-100 text-gray-700 uppercase text-xs font-semibold">
-              <tr>
-                <th className="px-4 py-2 border">ID</th>
-                <th className="px-4 py-2 border">Product Name</th>
-                <th className="px-4 py-2 border">Product Brand</th>
-                <th className="px-4 py-2 border">Product Owner</th>
-              </tr>
-            </thead>
-            <tbody>
-              {datax.map((dataproduct: any) => (
-                <tr
-                  key={dataproduct.product_id}
-                  className="hover:bg-gray-50 border-t transition"
-                >
-                  <td className="px-4 py-2 border">{dataproduct.product_id}</td>
-                  <td className="px-4 py-2 border">{dataproduct.product_name}</td>
-                  <td className="px-4 py-2 border">{dataproduct.product_brand}</td>
-                  <td className="px-4 py-2 border">{dataproduct.owner_name}</td>
+      <div className="flex flex-col flex-1">
+        <Header />
+        <main className="flex-1 p-6">
+          <div className="p-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Data Tables</h2>
+          <div className="bg-white p-6 rounded shadow overflow-x-auto">
+            <table className="min-w-full text-sm text-left border border-gray-200">
+              <thead className="bg-gray-100 text-gray-700 font-bold">
+                <tr>
+                  <th className="px-4 py-2 border text-center">ID</th>
+                  <th className="px-4 py-2 border text-center">Product Name</th>
+                  <th className="px-4 py-2 border text-center">Product Brand</th>
+                  <th className="px-4 py-2 border text-center">Product Owner</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </main>
+              </thead>
+              <tbody>
+                {datax.map((dataproduct: any) => (
+                  <tr
+                    key={dataproduct.product_id}
+                    className="hover:bg-gray-50 border-t transition"
+                  >
+                    <td className="px-4 py-2 border">{dataproduct.product_id}</td>
+                    <td className="px-4 py-2 border">{dataproduct.product_name}</td>
+                    <td className="px-4 py-2 border">{dataproduct.product_brand}</td>
+                    <td className="px-4 py-2 border">{dataproduct.owner_name}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }
